@@ -68,6 +68,11 @@ AppAsset::register($this);
 </div>
 
 <?= $this->context->my_var; ?>
+<?= $this->params['test_param']; ?>
+<?php if (isset($this->blocks['block1'])): ?>
+    <?= $this->blocks['block1'] ?>
+<?php endif; ?>
+
 <footer class="footer">
     <div class="container">
         <p class="pull-left">&copy; My Company <?= date('Y') ?></p>

@@ -1,7 +1,11 @@
 <?php use yii\widgets\ActiveForm; ?>
 <?php use yii\helpers\Html; ?>
+<?= $this->render('inc') ?>
+<p><?= $name; ?></p>
+<p><?= $age; ?></p>
 <div class="col-md-6">
     <h1>Страница с формой!</h1>
+    <?= $this->params['test_param']; ?>
     <?php $form = ActiveForm::begin();?>
     <?= $form->field($model, 'name'); ?>
     <?= $form->field($model, 'email'); ?>
@@ -13,4 +17,7 @@
     <?php $form = ActiveForm::end();?>
 </div>
 
+<?php $this->beginBlock('block1'); ?>
+    <p>...содержимоежимое1...</p>
+<?php $this->endBlock(); ?>
 
