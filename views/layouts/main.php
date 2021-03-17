@@ -67,7 +67,6 @@ AppAsset::register($this);
     </div>
 </div>
 
-<?= $this->context->my_var; ?>
 <?= $this->params['test_param']; ?>
 <?php if (isset($this->blocks['block1'])): ?>
     <?= $this->blocks['block1'] ?>

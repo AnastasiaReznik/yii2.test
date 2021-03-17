@@ -1,23 +1,47 @@
-<?php use yii\widgets\ActiveForm; ?>
-<?php use yii\helpers\Html; ?>
-<?= $this->render('inc') ?>
-<p><?= $name; ?></p>
-<p><?= $age; ?></p>
-<div class="col-md-6">
+<?php use yii\widgets\ActiveForm;
+use yii\helpers\Html;
+use yii\widgets\Pjax;
+ ?>
+<div class="col-md-12">
     <h1>Страница с формой!</h1>
-    <?= $this->params['test_param']; ?>
-    <?php $form = ActiveForm::begin();?>
-    <?= $form->field($model, 'name'); ?>
-    <?= $form->field($model, 'email'); ?>
-    <?= $form->field($model, 'text')->textarea(['rows' => 10]); ?>
+
+    <?php Pjax::begin(); ?>
+    <?php if (Yii::$app->session->hasFlash('success')) : ?>
+    <div class="alert alert-success" role="alert">
+        <?= Yii::$app->session->getFlash('success'); ?>
+    </div>
+    <?php endif; ?>
+    <?php $form = ActiveForm::begin([
+        'id' => 'my-form',
+        'options' => [
+            'class' => 'form-horizontal',
+            'data-pjax' => true, //data атрибут
+        ],
+        //конфигурация всей формы, оформление для всех полей
+        'fieldConfig' => [
+            'template' => " {label} \n <div class ='col-md-5'> {input} </div> \n <div class ='col-md-5'> {hint} </div> \n <div class ='col-md-5'> {error} </div>",
+        'labelOptions' => ['class' => 'col-md-2']
+        ]
+    ]);?>
+    <?= $form->field($model, 'name')->textInput(['placeholder' => 'Введите имя']) ?>
+
+
+    <?= $form->field($model, 'email')->input('email', ['placeholder' => 'Введите email']); ?>
+
+    <?= $form->field($model, 'topic')->textInput( ['placeholder' => 'Тема сообщения']); ?>
+
+
+
+    <?= $form->field($model, 'text')->textarea(['rows' => 7,  'placeholder' => 'Введите текст']); ?>
+
     <div class="form-group">
-    <?= Html::submitButton('Отправить', ['class' => 'btn btn-default']); ?>
+        <div class="col-md-5 col-md-offset-2">
+            <?= Html::submitButton('Отправить', ['class' => 'btn btn-default btn-block']); ?>
+        </div>
     </div>
 
-    <?php $form = ActiveForm::end();?>
+    <?php ActiveForm::end();?>
+    <?php Pjax::end();?>
 </div>
 
-<?php $this->beginBlock('block1'); ?>
-    <p>...содержимоежимое1...</p>
-<?php $this->endBlock(); ?>
 

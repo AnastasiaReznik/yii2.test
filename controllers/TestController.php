@@ -1,40 +1,47 @@
 <?php
 namespace app\controllers;
 use app\models\EntryForm;
-use yii\web\View;
+use Yii;
 
 class TestController extends AppController
 {
     // public $defaultAction = 'my-test';
-    public $my_var;
+    // public $my_var;
     //установка шаблона для этого контроллера
     // public $layout = 'test';
-    public function actionIndex($name = 'nastya', $age = 40)
+    public function actionIndex()
     {
         //физический путь к папке web - D:/OSPanel/domains/yii2.test/web
-        debug(\Yii::getAlias('@webroot'));
+        // debug(\Yii::getAlias('@webroot'));
         //просто url /web
-        debug(\Yii::getAlias('@web'));
-        
-        $this->my_var = 'my variable';
+        // debug(\Yii::getAlias('@web'));
+
         $this->layout = 'test';
         $this->view->title = "Test Page";
         $this->view->registerMetaTag(['name' => 'description', 'content' => 'мета описание1'], 'description');
 
-        // \Yii::$app->view->on(View::EVENT_END_BODY, function () {
-        //     echo date('Y-m-d');
-        // });
-
        \Yii::$app->view->params['test_param'] = 'Test param1';
 
-        // \Yii::$app->view->params['t1'] = 'T1 params';
-        // var_dump($name);
-        // return $this->render('index');
 
         //передача в вид, 1 параметр - название вида, 2 параметр данные
         $model = new EntryForm();
-        // return $this->render('index', compact('model'));
-        return $this->render('index', compact('model','name', 'age'));
+        //если данные пришли из POST и форма прошла валидацию
+        if ($model->load(\Yii::$app->request->post()) && $model->validate())
+        {
+            //если данные присланы через пиджакс
+            // if(\Yii::$app->request->isPjax) {
+            //    //записать в сессию флэш сообщение, success цвет сообщения
+            //    \Yii::$app->session->setFlash('success', 'Данные приняты PJAX');
+            //    //чтобы очистить форму надо новый пустой объект
+            //    $model = new EntryForm();
+            // } else {
+            //     \Yii::$app->session->setFlash('success', 'Данные приняты NO PJAX');
+                return $this->refresh();
+            // }
+
+        }
+
+        return $this->render('index', compact('model'));
 
     }
 
