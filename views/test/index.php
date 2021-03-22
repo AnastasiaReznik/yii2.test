@@ -45,3 +45,28 @@ use yii\widgets\Pjax;
 </div>
 
 
+<?php 
+// $js  = <<<JS
+// var form  = $('#my-form');
+// form.on('beforeSubmit', function() {
+//     //берем данные из формы
+//     var data = form.serialize();
+//     $.ajax({
+//         url: form.attr('action'),
+//         type: 'POST',
+//         data: data,
+//         success: function (res) {
+//             console.log(res);
+//             form[0].reset();
+//             // Implement successful
+//         },
+//         error: function() {
+//             alert('Error!');
+//         }
+//      });
+//      return false; // prevent default submit
+//     });
+// JS;
+
+// $this->registerjS($js);
+?>

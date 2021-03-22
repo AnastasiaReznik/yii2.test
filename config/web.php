@@ -16,9 +16,11 @@ $config = [
             // !!! insert a secret key in the following (if it is empty) - this is required by cookie validation
             'cookieValidationKey' => 'M0q5wJla9aeyNq09mWmt-zw1vPwEQsaP',
         ],
+        'language'=> 'ru-RU',
         'cache' => [
             'class' => 'yii\caching\FileCache',
         ],
+        'sourceLanguage'=> 'ru-RU',
         'user' => [
             'identityClass' => 'app\models\User',
             'enableAutoLogin' => true,
